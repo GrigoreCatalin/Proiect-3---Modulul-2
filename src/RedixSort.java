@@ -23,21 +23,23 @@ public class RedixSort {
     }
 
     public static ArrayList<Integer> ascendingNumbers(ArrayList<Integer> numbers, Queue<Integer>[] queue, int maxDigits) {
-        int q = 1;
+        int multiplication = 1;
         for (int i = 0; i < maxDigits; i++) {
             for (int j = 0; j < numbers.size(); j++) {
-                int num = ((numbers.get(j)) / q) % 10;
+                int num = ((numbers.get(j)) / multiplication) % 10;
                 queue[num].add((numbers.get(j)));
             }
-            q *= 10;
+            multiplication *= 10;
 
 
-            int n = 0;
-            for (int s = 0; s < 10; s++) {
-                while (!queue[s].isEmpty()) {
-                    int m = queue[s].remove();
-                    numbers.set(n, m);
-                    n++;
+            int rightLimit = 10;
+
+            int counter = 0;
+            for (int leftLimit = 0; leftLimit < rightLimit; leftLimit++) {
+                while (!queue[leftLimit].isEmpty()) {
+                    int elementRemoved = queue[leftLimit].remove();
+                    numbers.set(counter, elementRemoved);
+                    counter++;
                 }
             }
         }
@@ -45,22 +47,24 @@ public class RedixSort {
     }
 
     public static ArrayList<Integer> descendingNumbers(ArrayList<Integer> numbers, Queue<Integer>[] queue, int maxDigits) {
-        int q = 1;
+        int multiplication = 1;
 
         for (int i = 0; i < maxDigits; i++) {
             for (int j = 0; j < numbers.size(); j++) {
-                int num = ((numbers.get(j)) / q) % 10;
+                int num = ((numbers.get(j)) / multiplication) % 10;
                 queue[num].add((numbers.get(j)));
             }
-            q *= 10;
+            multiplication *= 10;
 
 
-            int n = 0;
-            for (int s = 9; s >= 0; s--) {
-                while (!queue[s].isEmpty()) {
-                    int m = queue[s].remove();
-                    numbers.set(n, m);
-                    n++;
+            int counter = 0;
+            int leftLimit = 0;
+
+            for (int rightLimit = 9; rightLimit >= 0; rightLimit--) {
+                while (!queue[rightLimit].isEmpty()) {
+                    int elementRemoved = queue[rightLimit].remove();
+                    numbers.set(counter, elementRemoved);
+                    counter++;
                 }
             }
         }

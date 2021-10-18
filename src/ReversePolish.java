@@ -14,10 +14,11 @@ public class ReversePolish {
         return -1;
     }
 
-    public static String reversepolish(String expression) {
+    public static String reversePolish(String expression) {
         Deque<Character> stack = new ArrayDeque();
 
         String result = "";
+
         int i = 0;
 
         while (i < expression.length()) {
@@ -97,7 +98,6 @@ public class ReversePolish {
             i++;
         }
         int result = stack.peek();
-        System.out.println(stack.size());
 
         if (stack.isEmpty()) {
             System.out.println("This stack is invalid");
@@ -109,8 +109,8 @@ public class ReversePolish {
 
     public static void main(String[] args) {
         String expression = "3+(2+1)*2^3^2-8/(5-1*2/2)";
-        String result = reversepolish(expression);
-        //  System.out.println(result);
+        String result = reversePolish(expression);
+        System.out.println(result);
         System.out.println(postFix(result));
 
     }
